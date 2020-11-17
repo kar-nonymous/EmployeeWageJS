@@ -114,8 +114,8 @@ function MapDayWithWage(dailyWage)
     dailyCounter++;
     return dailyCounter+" = "+dailyWage;
 }
-let mapDayWithWageArr = empDailyWageArr.map(MapDayWithWage);
 console.log("UC-7B Daily wage map");
+let mapDayWithWageArr = empDailyWageArr.map(MapDayWithWage);
 console.log(mapDayWithWageArr);
 // UC 7C
 function FullTimeWage(dailyWage)
@@ -186,3 +186,24 @@ empDailyHrsMap.forEach((value, key, map) =>
 console.log("Full Working Days: "+fullWorkingDays);
 console.log("Part Working Days: "+partWorkingDays);
 console.log("Non Working Days: "+nonWorkingDays);
+
+// UC 10
+let empDailyHrsAndWageArr = new Array();
+while(totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NO_OF_WORKING_DAYS)
+{
+    totalWorkingDays++;
+    empHrs = GetWorkingHours(empCheck);
+    totalEmpHrs += empHrs;
+    empDailyHrsAndWageArr.push(
+        {
+            dayNum : totalWorkingDays,
+            dailyHrs : empHrs,
+            dailyWage : CalculateDailyWage(empHrs),
+            toString()
+            {
+                return '\nDay'+this.dayNum+' => Working Hours is '+this.dailyHrs+' And Wage Earned= '+this.dailyWage
+            },
+        }
+    );
+}
+console.log("UC 10 Showing daily hours worked and wage earned: "+empDailyHrsAndWageArr);
